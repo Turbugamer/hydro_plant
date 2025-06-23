@@ -1,0 +1,277 @@
+
+{
+    "reservoirs": {
+        "Nyfjord": {
+            "water_amount": 16000000.0,
+            "water_area": 3000000.0,
+            "basin_area": 40000000.0,
+            "capacity": 20000000.0,
+            "river_inflow": 0.0,
+            "natural_inflow": 0.0,
+            "river_outflow": 0.0,
+            "generator_efficiency": 0.85,
+            "max_generator_flow": 75.0,
+            "generator_head_height": 25.0,
+            "generator_flow": 0.0,
+            "is_raining": true,
+            "rain_forecast_probability": 0.0820437750793785,
+            "in_rivers": [],
+            "out_rivers": [
+                "Nyfjord-Vestarne"
+            ]
+        },
+        "\u00d8starne": {
+            "water_amount": 9000000.0,
+            "water_area": 2000000.0,
+            "basin_area": 8000000.0,
+            "capacity": 15000000.0,
+            "river_inflow": 0.0,
+            "natural_inflow": 0.0,
+            "river_outflow": 0.0,
+            "generator_efficiency": 0.85,
+            "max_generator_flow": 50.0,
+            "generator_head_height": 30.0,
+            "generator_flow": 0.0,
+            "is_raining": false,
+            "rain_forecast_probability": 0.1749650305767088,
+            "in_rivers": [],
+            "out_rivers": [
+                "Arne-Tesselvannet"
+            ]
+        },
+        "Vestarne": {
+            "water_amount": 70000000.0,
+            "water_area": 8000000.0,
+            "basin_area": 25000000.0,
+            "capacity": 100000000.0,
+            "river_inflow": 0.0,
+            "natural_inflow": 0.0,
+            "river_outflow": 0.0,
+            "generator_efficiency": 0.85,
+            "max_generator_flow": 150.0,
+            "generator_head_height": 60.0,
+            "generator_flow": 0.0,
+            "is_raining": false,
+            "rain_forecast_probability": 0.0989551487162952,
+            "in_rivers": [],
+            "out_rivers": [
+                "Arne-Tesselvannet"
+            ]
+        },
+        "Tesselvannet": {
+            "water_amount": 30000000.0,
+            "water_area": 5000000.0,
+            "basin_area": 15000000.0,
+            "capacity": 50000000.0,
+            "river_inflow": 0.0,
+            "natural_inflow": 0.0,
+            "river_outflow": 0.0,
+            "generator_efficiency": 0.85,
+            "max_generator_flow": 100.0,
+            "generator_head_height": 40.0,
+            "generator_flow": 0.0,
+            "is_raining": false,
+            "rain_forecast_probability": 0.01,
+            "in_rivers": [],
+            "out_rivers": [
+                "Tesselvannet-Ocean"
+            ]
+        }
+    },
+    "rivers": {
+        "Nyfjord-Vestarne": {
+            "length_in_timesteps": 2,
+            "max_flow": 100.0,
+            "current_flow": 0.0,
+            "output_reservoir": "Vestarne"
+        },
+        "Arne-Tesselvannet": {
+            "length_in_timesteps": 3,
+            "max_flow": 240.0,
+            "current_flow": 0.0,
+            "output_reservoir": "Tesselvannet"
+        },
+        "Tesselvannet-Ocean": {
+            "length_in_timesteps": 2,
+            "max_flow": 200.0,
+            "current_flow": 0.0,
+            "output_reservoir": null
+        }
+    },
+    "mountains": {
+        "K\u00f8lasnuten": {
+            "current_snow_height": 294.3579593989877,
+            "temperature": -11.09483837316291,
+            "snow_area": 2500000.0,
+            "output_reservoir": "Nyfjord"
+        },
+        "Bastih\u00f8yden-\u00d8st": {
+            "current_snow_height": 55.6331722848078,
+            "temperature": -6.026440847850777,
+            "snow_area": 1800000.0,
+            "output_reservoir": "\u00d8starne"
+        },
+        "Bastih\u00f8yden-Vest": {
+            "current_snow_height": 49.787559820640595,
+            "temperature": -11.687575109161966,
+            "snow_area": 2200000.0,
+            "output_reservoir": "Vestarne"
+        },
+        "Tobikammen-Nord": {
+            "current_snow_height": 85.13322058137936,
+            "temperature": -7.491620780352997,
+            "snow_area": 3000000.0,
+            "output_reservoir": "Vestarne"
+        },
+        "Tobikammen-S\u00f8r": {
+            "current_snow_height": 60.585051269900966,
+            "temperature": -10.63346149984848,
+            "snow_area": 2800000.0,
+            "output_reservoir": "Vestarne"
+        }
+    },
+    "cash": 0.0,
+
+
+
+  "reservoirs": {
+    "Nyfjord": {
+      "water_amount": 16000000.0,
+      "water_area": 3000000.0,
+      "basin_area": 40000000.0,
+      "capacity": 20000000.0,
+      "river_inflow": 0.0,
+      "natural_inflow": 0.0,
+      "river_outflow": 0.0,
+      "generator_efficiency": 0.85,
+      "max_generator_flow": 75.0,
+      "generator_head_height": 25.0,
+      "generator_flow": 0.0,
+      "is_raining": true,
+      "rain_forecast_probability": 0.0820437750793785,
+      "in_rivers": [],
+      "out_rivers": ["Nyfjord-Vestarne"]
+    },
+    "Østarne": {
+      "water_amount": 9000000.0,
+      "water_area": 2000000.0,
+      "basin_area": 8000000.0,
+      "capacity": 15000000.0,
+      "river_inflow": 0.0,
+      "natural_inflow": 0.0,
+      "river_outflow": 0.0,
+      "generator_efficiency": 0.85,
+      "max_generator_flow": 50.0,
+      "generator_head_height": 30.0,
+      "generator_flow": 0.0,
+      "is_raining": false,
+      "rain_forecast_probability": 0.1749650305767088,
+      "in_rivers": [],
+      "out_rivers": ["Arne-Tesselvannet"]
+    },
+    "Vestarne": {
+      "water_amount": 70000000.0,
+      "water_area": 8000000.0,
+      "basin_area": 25000000.0,
+      "capacity": 100000000.0,
+      "river_inflow": 0.0,
+      "natural_inflow": 0.0,
+      "river_outflow": 0.0,
+      "generator_efficiency": 0.85,
+      "max_generator_flow": 150.0,
+      "generator_head_height": 60.0,
+      "generator_flow": 0.0,
+      "is_raining": false,
+      "rain_forecast_probability": 0.0989551487162952,
+      "in_rivers": [],
+      "out_rivers": ["Arne-Tesselvannet"]
+    },
+    "Tesselvannet": {
+      "water_amount": 30000000.0,
+      "water_area": 5000000.0,
+      "basin_area": 15000000.0,
+      "capacity": 50000000.0,
+      "river_inflow": 0.0,
+      "natural_inflow": 0.0,
+      "river_outflow": 0.0,
+      "generator_efficiency": 0.85,
+      "max_generator_flow": 100.0,
+      "generator_head_height": 40.0,
+      "generator_flow": 0.0,
+      "is_raining": false,
+      "rain_forecast_probability": 0.01,
+      "in_rivers": [],
+      "out_rivers": ["Tesselvannet-Ocean"]
+    }
+  },
+  "rivers": {
+    "Nyfjord-Vestarne": {
+      "length_in_timesteps": 2,
+      "max_flow": 100.0,
+      "current_flow": 0.0,
+      "output_reservoir": "Vestarne",
+      "flow": [2500.0, 2500.0]
+    },
+    "Arne-Tesselvannet": {
+      "length_in_timesteps": 3,
+      "max_flow": 240.0,
+      "current_flow": 0.0,
+      "output_reservoir": "Tesselvannet",
+      "flow": [2666.67, 2666.67, 2666.67]
+    },
+    "Tesselvannet-Ocean": {
+      "length_in_timesteps": 2,
+      "max_flow": 200.0,
+      "current_flow": 0.0,
+      "output_reservoir": null,
+      "flow": [5000.0, 5000.0]
+    }
+  },
+  "mountains": {
+    "Kølasnuten": {
+      "current_snow_height": 294.3579593989877,
+      "temperature": -11.09483837316291,
+      "snow_area": 2500000.0,
+      "output_reservoir": "Nyfjord",
+      "snow_height": 294.3579593989877
+    },
+    "Bastihøyden-Øst": {
+      "current_snow_height": 55.6331722848078,
+      "temperature": -6.026440847850777,
+      "snow_area": 1800000.0,
+      "output_reservoir": "Østarne",
+      "snow_height": 55.6331722848078
+    },
+    "Bastihøyden-Vest": {
+      "current_snow_height": 49.787559820640595,
+      "temperature": -11.687575109161966,
+      "snow_area": 2200000.0,
+      "output_reservoir": "Vestarne",
+      "snow_height": 49.787559820640595
+    },
+    "Tobikammen-Nord": {
+      "current_snow_height": 85.13322058137936,
+      "temperature": -7.491620780352997,
+      "snow_area": 3000000.0,
+      "output_reservoir": "Vestarne",
+      "snow_height": 85.13322058137936
+    },
+    "Tobikammen-Sør": {
+      "current_snow_height": 60.585051269900966,
+      "temperature": -10.63346149984848,
+      "snow_area": 2800000.0,
+      "output_reservoir": "Vestarne",
+      "snow_height": 60.585051269900966
+    }
+  },
+  "cash": 0.0,
+  "marked_demand": 0.0,
+  "sold_power": [],
+  "production_results": {
+    "price": 0.0,
+    "amount": 0.0
+  },
+  "is_game_over": false,
+  "timestep": 5,
+  "other_players": []
+}

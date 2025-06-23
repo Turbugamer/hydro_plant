@@ -16,8 +16,10 @@ class OwnStrategy(Strategy):
         # full current state: self.current_state
         """
 
-        print("timestep: {}, cash; {}. marked demand: {}".format(self.current_state["timestep"], self.current_state["cash"], self.current_state["marked_demand"]))
+        print("timestep: {}, cash; {}. marked demand: {}, water_amount: {}".format(self.current_state["timestep"], self.current_state["cash"], self.current_state["marked_demand"]))
+        print("reservoirs: {}".format(self.initial_state["reservoirs"]))
         
+
         demand = self.current_state["marked_demand"]
         if demand < 0.3 * self.current_state["total_demand"]:
             print("Demand is low, not producing.")
