@@ -64,12 +64,12 @@ class SmartHydroStrategy:
             rivers = res.get("out_rivers", [])
 
             # Refill condition
-            if fill_pct < 0.3:
+            if fill_pct < 0.15:
                 if others_are_dry and fill_pct > 0.25:
                     print(f"⚡ Override: releasing from {rid} at {fill_pct:.0%} (others dry)")
                 else:
                     self.recharging_reservoirs.add(rid)
-            elif fill_pct >= 0.75:
+            elif fill_pct >= 0.45:
                 self.recharging_reservoirs.discard(rid)
 
             if rid in self.recharging_reservoirs:
@@ -78,7 +78,7 @@ class SmartHydroStrategy:
             safe = True
             for r_id in rivers:
                 river = self.current_state["rivers"][r_id]
-                if river["current_flow"] >= river["max_flow"] * 0.97:
+                if river["current_flow"] >= river["max_flow"] * 0.75:
                     safe = False
                     break
 
@@ -115,13 +115,6 @@ class SmartHydroStrategy:
         selected = self.select_reservoirs()
 
         # Final 20 rounds: release it all
-        if remaining <= 20:
-            print(f"🚨 Endgame: {remaining} rounds left. Dumping water!")
-            return {
-                "reservoir_ids": self.reservoir_ids,
-                "power_price": min(self.current_price, 4.99)
-            }
-
         # ✅ Rich Logging
         print(f"\n🕒 Timestep {timestep}")
         print(f"💡 Price: {self.current_price:.2f} | ⚡ Sold: {sales_volume:.2f} | 📈 Demand: {demand}")
@@ -149,8 +142,8 @@ if __name__ == "__main__":
  
     no_produce_strategy = SmartHydroStrategy()
  
-    uri = "ws://localhost:8000/ws"    
-    player_name = "larry_test"
+    uri = "ws://192.168.16.69:8000/ws"    
+    player_name = "Mama_Larry"
     game_id = "game1"
  
     client = Client(no_produce_strategy, uri, player_name, game_id)

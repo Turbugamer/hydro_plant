@@ -166,7 +166,7 @@ if __name__ == "__main__":
 
     no_produce_strategy = Strategy()
 
-    uri = "ws://localhost:8000/ws"    
+    uri = "ws://192.168.16.69:8000/ws"  
     player_name = "player1"
     game_id = "game1"
 

@@ -19,12 +19,12 @@ class SmartHydroStrategy:
         self.current_price = random.uniform(4, 4.999999)
         self.price_step = 0.1
         self.small_win_step = 0.01
-        self.min_price = 0.5
+        self.min_price = 3.75
         self.max_price = 4.9999999
 
         self.recharging_reservoirs = set()
         self.total_power_sold = 0
-        self.total_timesteps = 1000  # Default, gets overwritten later
+        self.total_timesteps = 200  # Default, gets overwritten later
 
     def got_initial_state(self):
         self.reservoir_ids = list(self.initial_state["reservoirs"].keys())
@@ -58,12 +58,12 @@ class SmartHydroStrategy:
             pct =water_amount/ max_w if max_w > 0 else 0
             rivers = res.get("out_rivers", [])
 
-            if pct < 0.4:
-                if others_dry and pct > 0.2:
+            if pct < 0.2:
+                if others_dry and pct > 0.3:
                     print(f"⚡ Override: releasing from {rid} at {pct:.0%} (others dry)")
                 else:
                     self.recharging_reservoirs.add(rid)
-            elif pct >= 0.75:
+            elif pct >= 0.60:
                 self.recharging_reservoirs.discard(rid)
 
             if rid in self.recharging_reservoirs:
@@ -73,7 +73,7 @@ class SmartHydroStrategy:
             safe = True
             for r_id in rivers:
                 river = self.current_state["rivers"][r_id]
-                if river["current_flow"] >= river["max_flow"] * 0.975:
+                if river["current_flow"] >= river["max_flow"] * 0.75:
                     safe = False
                     break
 
@@ -111,16 +111,10 @@ class SmartHydroStrategy:
         self.current_price = max(self.min_price, min(self.current_price, self.max_price))
 
         # Final 20 rounds: release it all
-        if remaining <= 20:
-            print(f"🚨 Endgame: {remaining} rounds left. Dumping water!")
-            return {
-                "reservoir_ids": self.reservoir_ids,
-                "power_price": min(self.current_price, 4.99)
-            }
 
         selected = self.select_reservoirs()
 
-        print(f"\n🕒 Timestep {ts} | Price: {self.current_price:.2f} | Sold: {sold:.2f} | Demand: {demand}")
+        #print(f"\n🕒 Timestep {ts} | Price: {self.current_price:.2f} | Sold: {sold:.2f} | Demand: {demand}")
         for rid in self.reservoir_ids:
             res = self.current_state["reservoirs"][rid]
             water_amount = res["water_amount"]
@@ -146,8 +140,8 @@ if __name__ == "__main__":
  
     no_produce_strategy = SmartHydroStrategy()
  
-    uri = "ws://localhost:8000/ws"    
-    player_name = "larry_test"
+    uri = "ws://192.168.16.69:8000/ws"    
+    player_name = "Meow"
     game_id = "game1"
  
     client = Client(no_produce_strategy, uri, player_name, game_id)
