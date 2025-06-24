@@ -25,7 +25,7 @@ class SmartHydroStrategy:
 
         self.recharging_reservoirs = set()
         self.total_power_sold = 0
-        self.total_timesteps = 1000  # Default fallback
+        self.total_timesteps = 1000
         self.recent_production = []
         self.max_timestep_seen = 0
 
@@ -37,6 +37,15 @@ class SmartHydroStrategy:
 
     def is_high_demand_season(self):
         return 1 <= self.get_month() <= 7
+
+    def seasonal_thresholds(self):
+        month = self.get_month()
+        if month <= 6:
+            return (0.4, 0.7)
+        progress = (month - 6) / 6  # July = 0.0, Dec = 1.0
+        low = 0.4 - 0.2 * progress
+        high = 0.7 - 0.2 * progress
+        return (low, high)
 
     def other_players_water_low(self):
         others = self.current_state.get("other_players", [])
@@ -53,6 +62,7 @@ class SmartHydroStrategy:
     def select_reservoirs(self):
         selected = []
         others_dry = self.other_players_water_low()
+        low_thresh, high_thresh = self.seasonal_thresholds()
 
         for rid in self.reservoir_ids:
             res = self.current_state["reservoirs"][rid]
@@ -61,12 +71,12 @@ class SmartHydroStrategy:
             pct = w / cap if cap > 0 else 0
             rivers = res.get("out_rivers", [])
 
-            if pct < 0.4:
-                if others_dry and pct > 0.25:
+            if pct < low_thresh:
+                if others_dry and pct > (low_thresh - 0.1):
                     print(f"⚡ Override: releasing from {rid} at {pct:.0%} (others dry)")
                 else:
                     self.recharging_reservoirs.add(rid)
-            elif pct >= 0.7:
+            elif pct >= high_thresh:
                 self.recharging_reservoirs.discard(rid)
 
             if rid in self.recharging_reservoirs:
@@ -92,7 +102,6 @@ class SmartHydroStrategy:
         sold = self.current_state.get("production_results", {}).get("amount", 0)
         self.total_power_sold += sold
 
-        # Price random walk
         if sold == 0:
             self.current_price -= random.uniform(0, self.price_step)
         else:
@@ -105,10 +114,8 @@ class SmartHydroStrategy:
         else:
             self.current_price -= 0.03
 
-        # Clamp adaptive band
         self.current_price = max(self.min_price, min(self.current_price, self.max_price))
 
-        # Endgame: dump water, ignore recharge limits
         if remaining <= 20:
             print(f"🚨 Endgame: {remaining} rounds left. Dumping water!")
             self.recharging_reservoirs.clear()
@@ -131,10 +138,9 @@ class SmartHydroStrategy:
                 "power_price": min(self.current_price, 4.99)
             }
 
-        # Choose reservoirs
         selected = self.select_reservoirs()
 
-        # Dynamic price band tuning
+        # Dynamic pricing band update
         was_active = bool(selected)
         self.recent_production.append(was_active)
         if len(self.recent_production) > 50:
@@ -152,7 +158,6 @@ class SmartHydroStrategy:
         self.min_price = max(0.5, min(self.min_price, 5.0))
         self.max_price = max(self.min_price + 0.5, min(self.max_price, 6.5))
 
-        # Undercut buyer bot
         if self.current_price >= 5 and self.other_players_water_low() and demand > 0:
             self.current_price = 4.99
             print("🔽 Undercutting fallback buyer bot at 5.00")
@@ -176,6 +181,7 @@ class SmartHydroStrategy:
         print("\n🏁 Game Over – Strategy Complete.")
         print(f"💰 Final cash: {self.current_state.get('cash', 'N/A')}")
         print(f"⚡ Total power sold: {self.total_power_sold:.2f}")
+
 
 
  
