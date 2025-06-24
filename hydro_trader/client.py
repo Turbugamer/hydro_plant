@@ -59,7 +59,7 @@ class Strategy:
         plan["reservoir_ids"].append("Vestarne") # always produce with Vestarne
         plan["reservoir_ids"] = self.reservoir_ids # produce all
 
-        plan["power_price"] = 5.69
+        plan["power_price"] = 5
         return plan
     
     def game_over(self):
